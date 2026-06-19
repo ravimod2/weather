@@ -1,0 +1,17 @@
+echo "Running tests..."
+npm test || {
+  echo "❌ Tests failed. Commit blocked."
+  exit 1
+}
+
+echo "Running security audit (npm audit, blocking on high/critical)..."
+npm audit --audit-level=high || {
+  echo "❌ npm audit found high or critical severity vulnerabilities. Commit blocked."
+  echo "   Run 'npm audit' for details, 'npm audit fix' to attempt a non-breaking fix."
+  echo "   If a finding is a false positive or genuinely unfixable right now, do not bypass"
+  echo "   this hook with --no-verify without team sign-off — fix the dependency or document"
+  echo "   why it's accepted."
+  exit 1
+}
+
+echo "✅ Tests passed and no high/critical vulnerabilities found."
