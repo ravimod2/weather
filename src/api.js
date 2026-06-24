@@ -34,9 +34,9 @@ const fetchCurrentWeather = async (city) => {
   } catch (error) {
     if (error.response) {
       const { status, data } = error.response;
-      throw new Error(`API error ${status}: ${data.message || 'Unknown error'}`);
+      throw new Error(`API error ${status}: ${data.message || 'Unknown error'}`, { cause: error });
     }
-    throw new Error(`Network error: ${error.message}`);
+    throw new Error(`Network error: ${error.message}`, { cause: error });
   }
 };
 
@@ -54,9 +54,9 @@ const fetchForecast = async (city) => {
   } catch (error) {
     if (error.response) {
       const { status, data } = error.response;
-      throw new Error(`API error ${status}: ${data.message || 'Unknown error'}`);
+      throw new Error(`API error ${status}: ${data.message || 'Unknown error'}`, { cause: error });
     }
-    throw new Error(`Network error: ${error.message}`);
+    throw new Error(`Network error: ${error.message}`, { cause: error });
   }
 };
 
