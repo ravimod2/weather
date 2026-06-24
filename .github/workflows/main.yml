@@ -66,7 +66,7 @@ jobs:
 
       - name: Install Claude Code CLI
         run: |
-          curl -sL claude.ai/install.sh | sh
+          curl -sL claude.ai/install.sh | bash
           echo "$HOME/.local/bin" >> "$GITHUB_PATH"
 
       - name: Claude Code Vibe Check
