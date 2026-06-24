@@ -64,15 +64,18 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Install Claude Code CLI
+        run: |
+          curl -sL claude.ai/install.sh | sh
+          echo "$HOME/.local/bin" >> "$GITHUB_PATH"
+
       - name: Claude Code Vibe Check
-        uses: anthropics/claude-code-action@v1
-        with:
-          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
-          prompt: >
-            Review the UI components in this repo. Check that the weather
-            dashboard renders correctly, has no obvious layout issues, and
-            follows the project's CLAUDE.md standards. Output PASS or FAIL
-            with reasons.
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: |
+          claude -p "Review the UI components in this repo. Check that the weather
+          dashboard has no obvious layout issues and follows CLAUDE.md standards.
+          Output PASS or FAIL with reasons." --output-format json
 
   deploy:
     name: Deploy
