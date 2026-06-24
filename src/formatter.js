@@ -69,4 +69,11 @@ const formatForecast = (data) => {
   ].join('\n');
 };
 
-export { formatCurrentWeather, formatForecast, iconToEmoji };
+/**
+ * Formats the footer line shown beneath weather output.
+ * @param {Date} [now] - Reference date used for the year (defaults to current date).
+ * @returns {string} Formatted, chalk-coloured footer string.
+ */
+const formatFooter = (now = new Date()) => chalk.dim(`\nPowered by OpenWeather API · ${now.getFullYear()}`);
+
+export { formatCurrentWeather, formatForecast, formatFooter, iconToEmoji };

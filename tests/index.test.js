@@ -8,6 +8,7 @@ jest.unstable_mockModule('../src/api.js', () => ({
 jest.unstable_mockModule('../src/formatter.js', () => ({
   formatCurrentWeather: jest.fn(() => 'formatted weather'),
   formatForecast: jest.fn(() => 'formatted forecast'),
+  formatFooter: jest.fn(() => 'formatted footer'),
 }));
 
 const { fetchCurrentWeather, fetchForecast } = await import('../src/api.js');

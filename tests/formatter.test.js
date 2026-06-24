@@ -1,4 +1,4 @@
-import { formatCurrentWeather, formatForecast, iconToEmoji } from '../src/formatter.js';
+import { formatCurrentWeather, formatForecast, formatFooter, iconToEmoji } from '../src/formatter.js';
 
 const mockCurrentData = {
   name: 'London',
@@ -61,5 +61,19 @@ describe('formatForecast', () => {
     // 8 items, filter every 8th → 1 entry
     const lines = output.split('\n').filter((l) => l.includes('clear sky'));
     expect(lines).toHaveLength(1);
+  });
+});
+
+describe('formatFooter', () => {
+  test('includes the OpenWeather attribution', () => {
+    expect(formatFooter(new Date('2026-06-24'))).toContain('Powered by OpenWeather API');
+  });
+
+  test('includes the year from the given date', () => {
+    expect(formatFooter(new Date('2026-06-24'))).toContain('2026');
+  });
+
+  test('defaults to the current year when no date is given', () => {
+    expect(formatFooter()).toContain(String(new Date().getFullYear()));
   });
 });
